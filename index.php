@@ -37,13 +37,22 @@
 					<button class="btn btn-mini btn-game span2" id="9"></button>
 				</div>
 			</div>
+			<div class="text-center span6 offset3">
+				<h6>Score: <span id="score">0</span></h6>
+				<h6>Clicks: <span id="clicks">0</span></h6>
+				<h6>High Score: <span id="highscore">0</span></h6>
+			</div>
 		</div>
 	</div>
 		
 	<script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script>
-		var cw = $('.btn-game').width();
+		var cw = $('.btn-game').width(),
+		    score = 0,
+		    clicks = 0,
+		    highscore = 0,
+		    level = 0;
 		function toggle(theId) {
 			if ( theId >= 1 && theId <= 9 ) {
 				var theBtn = $('#' + theId);
@@ -57,8 +66,8 @@
 		$('.btn-game')
 			.css({'height':cw+'px'})
 			.click(function(){
-				
 				//do the toggles
+				clicks++;
 				theId = parseInt($(this).attr("id"));
 				toggle(theId);						//toggle myself
 				toggle(theId-3); toggle(theId+3);	//toggle above and below me
@@ -71,7 +80,9 @@
 				
 				//check if the user won this round
 				if ( $('.btn-danger').length >= 9 ) {
-					alert("Great job dickhead");
+					score += Math.round((++level*100)/clicks);
+					if(level >= 10) endGame();
+					else alert("You did it! Only " + (10 - level) + " more " + (10 - level == 1) ? "level" : "levels" + " to go!");
 					$('.btn-danger').removeClass('btn-danger'); //reset field to white
 					//set the field based on the winning click
 					switch ( theId ) {
@@ -119,9 +130,19 @@
 							break;
 					}
 				}
-				
+				$('#clicks').text(clicks);
+				$('#score').text(score);
+				$('#highscore').text(highscore);
 			})
 		;
+		function endGame(){
+			highscore = (highscore >= score) ? highscore : score;
+			alert((highscore == score) ? "High score!" : "Well done!"
+				+ " Your score was: " + score + ".");
+			score = 0;
+			clicks = 0;
+			level = 0;
+		}
 	</script>
 
   </body>
