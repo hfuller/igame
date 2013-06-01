@@ -78,10 +78,10 @@
 					toggle(theId+1); //toggle to the right of me
 				}
 				
+				score = (level/clicks)*100;
 				//check if the user won this round
 				if ( $('.btn-danger').length >= 9 ) {
-					score = (++level/clicks)*100;
-					if(level >= 10) endGame();
+					if(++level >= 10) endGame();
 					else alert("You did it! Only " + (10 - level) + " more " + ((10 - level == 1) ? "level" : "levels") + " to go!");
 					$('.btn-danger').removeClass('btn-danger'); //reset field to white
 					//set the field based on the winning click
