@@ -14,6 +14,13 @@
 			position:absolute;
 			display:none;
 		}
+		#settings {
+			padding-top:16px;
+			display:none;
+		}
+		#settingsbtn {
+			margin-top:10px;
+		}
 	</style>
   </head>
   <body>
@@ -31,6 +38,24 @@
 				A port of Game by <a href="http://dr3v.com/">Nelson Gatlin</a>.
 			</div>
 			<div class="titlebtn span1">
+				<button class="btn" id="settingsbtn"><i class="icon-cog"></i></button>
+			</div>
+		</div>
+		
+		<div id="settings" class="row settings">
+			<div class="span6 offset3">
+				<div class="well">
+					<h3>Settings</h3>
+					<form>
+						<div class="control-group">
+							<div class="controls">
+								<label class="checkbox">
+									<input type="checkbox" id="s_profanity"> Profanity
+								</label>
+							</div>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
 			
@@ -80,6 +105,10 @@
 	<script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script>
+		$('#settingsbtn')
+			.click(function() {
+				$('#settings').toggle(500);
+			});
 		var cw = $('.btn-game').width(),
 		    score = 0,
 		    clicks = 0,
@@ -118,7 +147,7 @@
 				//check if the user won this round
 				if ( $('.btn-danger').length >= 9 ) {
 					if(++level >= 10) endGame();
-					else betterAlert("You did it! Only " + (10 - level) + " more " + ((10 - level == 1) ? "level" : "levels") + " to go!");
+					else betterAlert(( $("#s_profanity").is(':checked') ? "Great job dickhead." : "You did it!") + " Only " + (10 - level) + " more " + ((10 - level == 1) ? "level" : "levels") + " to go!");
 					
 					//hide the entire field
 					$('#buttons').fadeOut(200,
