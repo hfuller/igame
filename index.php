@@ -49,10 +49,12 @@
 		</div>
 		<div class="row">
 			<div class="text-right span3 offset3">
+				<h4>Wins</h4>
 				<h4>Clicks</h4>
 				<h4>High Score</h4>
 			</div>
 			<div class="span3">
+				<h4 id="wins">0</h4>
 				<h4 id="clicks">0</h4>
 				<h4 id="highscore">0</h4>
 			</div>
@@ -93,6 +95,10 @@
 				}
 				
 				score = (level/clicks)*100;
+				
+				//go ahead and round the score. I don't think this breaks anything.
+				score = (Math.round(score*100))/100; //I can't believe this is how you round.
+				
 				//check if the user won this round
 				if ( $('.btn-danger').length >= 9 ) {
 					if(++level >= 10) endGame();
@@ -143,10 +149,10 @@
 							$('#9').addClass('btn-danger');
 							break;
 					}
+					$('#wins').text(level);
 				}
 				$('#clicks').text(clicks);
 				$('#score').text(score);
-				$('#highscore').text(highscore);
 			})
 		;
 		function endGame(){
@@ -156,6 +162,7 @@
 			score = 0;
 			clicks = 0;
 			level = 0;
+			$('#highscore').text(highscore);
 		}
 	</script>
 
