@@ -1,6 +1,4 @@
 iGame
 =====
 
-Port of Nelson Gatlin's "Game" to HTML, JS, CSS.
-
-Currently slightly NSFW, and not that good.
+Port of Nelson Gatlin's "Game" to HTML, JS, and CSS. Contains scoring just like the original VB version.

@@ -17,7 +17,7 @@
   <div class="container">
 	  <div class="row">
 			<div class="title text-center span6 offset3">
-				<h4>iGame</h4>
+				<h2>iGame</h2>
 				A port of Game by <a href="http://dr3v.com/">Nelson Gatlin</a>.
 			</div>
 			<div class="buttons span6 offset3">
@@ -37,10 +37,24 @@
 					<button class="btn btn-mini btn-game span2" id="9"></button>
 				</div>
 			</div>
-			<div class="text-center span6 offset3">
-				<h6>Score: <span id="score">0</span></h6>
-				<h6>Clicks: <span id="clicks">0</span></h6>
-				<h6>High Score: <span id="highscore">0</span></h6>
+		</div>
+		
+		<div class="row">
+			<div class="text-right span3 offset3">
+				<h3>Score</h3>
+			</div>
+			<div class="span3">
+				<h3 id="score">0</h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="text-right span3 offset3">
+				<h4>Clicks</h4>
+				<h4>High Score</h4>
+			</div>
+			<div class="span3">
+				<h4 id="clicks">0</h4>
+				<h4 id="highscore">0</h4>
 			</div>
 		</div>
 	</div>
