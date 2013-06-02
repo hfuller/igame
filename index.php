@@ -10,17 +10,32 @@
 			margin-top:10px;
 			margin-bottom:10px;
 		}
+		#alert {
+			position:absolute;
+			display:none;
+		}
 	</style>
   </head>
   <body>
 
   <div class="container">
 	  <div class="row">
-			<div class="title text-center span6 offset3">
+			<div id="alert" class="rollup span6 offset3">
+				<h4 id="alerttext" class="alert alert-success">Sup?</h4>
+			</div>
+			
+			<div class="titlebtn span1 offset3">
+			</div>
+			<div class="title text-center span4">
 				<h2>iGame</h2>
 				A port of Game by <a href="http://dr3v.com/">Nelson Gatlin</a>.
 			</div>
-			<div class="buttons span6 offset3">
+			<div class="titlebtn span1">
+			</div>
+		</div>
+			
+		<div class="row">
+			<div id="buttons" class="buttons span6 offset3">
 				<div class="row">
 					<button class="btn btn-mini btn-game span2" id="1"></button>
 					<button class="btn btn-mini btn-game span2" id="2"></button>
@@ -37,6 +52,7 @@
 					<button class="btn btn-mini btn-game span2" id="9"></button>
 				</div>
 			</div>
+			
 		</div>
 		
 		<div class="row">
@@ -102,53 +118,17 @@
 				//check if the user won this round
 				if ( $('.btn-danger').length >= 9 ) {
 					if(++level >= 10) endGame();
-					else alert("You did it! Only " + (10 - level) + " more " + ((10 - level == 1) ? "level" : "levels") + " to go!");
-					$('.btn-danger').removeClass('btn-danger'); //reset field to white
-					//set the field based on the winning click
-					switch ( theId ) {
-						case 1:
-							$('#2').addClass('btn-danger');
-							$('#4').addClass('btn-danger');
-							$('#8').addClass('btn-danger');
-							break;
-						case 2:
-							$('#5').addClass('btn-danger');
-							$('#8').addClass('btn-danger');
-							break;
-						case 3:
-						case 6:
-							$('#1').addClass('btn-danger');
-							$('#6').addClass('btn-danger');
-							$('#9').addClass('btn-danger');
-							break;
-						case 4:
-							$('#2').addClass('btn-danger');
-							$('#5').addClass('btn-danger');
-							$('#7').addClass('btn-danger');
-							break;
-						case 5:
-							$('#2').addClass('btn-danger');
-							$('#7').addClass('btn-danger');
-							$('#9').addClass('btn-danger');
-							break;
-						case 7:
-							$('#1').addClass('btn-danger');
-							$('#3').addClass('btn-danger');
-							$('#8').addClass('btn-danger');
-							break;
-						case 8:
-							$('#2').addClass('btn-danger');
-							$('#3').addClass('btn-danger');
-							$('#5').addClass('btn-danger');
-							$('#8').addClass('btn-danger');
-							break;
-						case 9:
-							$('#2').addClass('btn-danger');
-							$('#5').addClass('btn-danger');
-							$('#7').addClass('btn-danger');
-							$('#9').addClass('btn-danger');
-							break;
+					else betterAlert("You did it! Only " + (10 - level) + " more " + ((10 - level == 1) ? "level" : "levels") + " to go!");
+					
+					//hide the entire field
+					$('#buttons').fadeOut(200,
+					function(){
+						setField(theId);
+						//show field
+						$('#buttons').fadeIn(500);
 					}
+					);				
+					
 					$('#wins').text(level);
 				}
 				$('#clicks').text(clicks);
@@ -157,12 +137,65 @@
 		;
 		function endGame(){
 			highscore = (highscore >= score) ? highscore : score;
-			alert((highscore == score) ? "High score!" : "Well done!"
+			betterAlert((highscore == score) ? "High score!" : "Well done!"
 				+ " Your score was: " + score + ".");
 			score = 0;
 			clicks = 0;
 			level = 0;
 			$('#highscore').text(highscore);
+		}
+		function betterAlert(msg){
+			$('#alerttext').text(msg);
+			$('#alert').show(250).delay(3000).fadeOut(2000);
+		}
+		function setField(theId){
+			$('.btn-danger').removeClass('btn-danger'); //reset field to white
+			//set the field based on the winning click
+			switch ( theId ) {
+				case 1:
+					$('#2').addClass('btn-danger');
+					$('#4').addClass('btn-danger');
+					$('#8').addClass('btn-danger');
+					break;
+				case 2:
+					$('#5').addClass('btn-danger');
+					$('#8').addClass('btn-danger');
+					break;
+				case 3:
+				case 6:
+					$('#1').addClass('btn-danger');
+					$('#6').addClass('btn-danger');
+					$('#9').addClass('btn-danger');
+					break;
+				case 4:
+					$('#2').addClass('btn-danger');
+					$('#5').addClass('btn-danger');
+					$('#7').addClass('btn-danger');
+					break;
+				case 5:
+					$('#2').addClass('btn-danger');
+					$('#7').addClass('btn-danger');
+					$('#9').addClass('btn-danger');
+					break;
+				case 7:
+					$('#1').addClass('btn-danger');
+					$('#3').addClass('btn-danger');
+					$('#8').addClass('btn-danger');
+					break;
+				case 8:
+					$('#2').addClass('btn-danger');
+					$('#3').addClass('btn-danger');
+					$('#5').addClass('btn-danger');
+					$('#8').addClass('btn-danger');
+					break;
+				case 9:
+					$('#2').addClass('btn-danger');
+					$('#5').addClass('btn-danger');
+					$('#7').addClass('btn-danger');
+					$('#9').addClass('btn-danger');
+					break;
+			}
+
 		}
 	</script>
 
